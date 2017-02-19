@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		127E8BD3099744E9A3913259 /* Pods_W1_Movies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5013EA4ADBC90E2790B995 /* Pods_W1_Movies.framework */; };
+		205A8F3F1E59A59C002B412A /* MoviesGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A8F3E1E59A59C002B412A /* MoviesGridCell.swift */; };
 		20A818FE1E58A29C00513AE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A818FD1E58A29C00513AE4 /* AppDelegate.swift */; };
 		20A819031E58A29C00513AE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20A819011E58A29C00513AE4 /* Main.storyboard */; };
 		20A819051E58A29C00513AE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20A819041E58A29C00513AE4 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		0A5013EA4ADBC90E2790B995 /* Pods_W1_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_W1_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		205A8F3E1E59A59C002B412A /* MoviesGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesGridCell.swift; sourceTree = "<group>"; };
 		20A818FA1E58A29C00513AE4 /* W1_Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = W1_Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20A818FD1E58A29C00513AE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20A819021E58A29C00513AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				20A8190F1E58A36500513AE4 /* MoviesViewController.swift */,
 				20A819111E58AB6800513AE4 /* MovieCell.swift */,
 				20D62D9F1E5937C6009FB2A1 /* DetailsViewController.swift */,
+				205A8F3E1E59A59C002B412A /* MoviesGridCell.swift */,
 			);
 			path = W1_Movies;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			files = (
 				20A818FE1E58A29C00513AE4 /* AppDelegate.swift in Sources */,
 				20A819101E58A36500513AE4 /* MoviesViewController.swift in Sources */,
+				205A8F3F1E59A59C002B412A /* MoviesGridCell.swift in Sources */,
 				20A819121E58AB6800513AE4 /* MovieCell.swift in Sources */,
 				20D62DA01E5937C6009FB2A1 /* DetailsViewController.swift in Sources */,
 			);

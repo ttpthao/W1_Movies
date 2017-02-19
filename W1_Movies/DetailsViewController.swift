@@ -17,9 +17,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var infoView: UIView!
     
-    var imgUrl = ""
-    var summary = ""
-    var movieTitle = ""
+    var movie: NSDictionary!
+    let baseUrl = "https://image.tmdb.org/t/p/w500"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +26,13 @@ class DetailsViewController: UIViewController {
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
 
         // Do any additional setup after loading the view.
-        posterImg.setImageWith(NSURL(string: imgUrl) as! URL)
-        summaryLabel.text = summary
+        let posterPath = movie["poster_path"] as? String
+        posterImg.setImageWith(NSURL(string: baseUrl + posterPath!) as! URL)
+        summaryLabel.text = movie["overview"] as? String ?? ""
         summaryLabel.sizeToFit()
-        titleLabel.text = movieTitle
+        titleLabel.text = movie["title"] as? String ?? ""
+        titleLabel.sizeToFit()
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
     }
 
     override func didReceiveMemoryWarning() {
