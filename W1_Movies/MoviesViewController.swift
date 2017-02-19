@@ -16,6 +16,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let baseUrl = "http://image.tmdb.org/t/p/w500"
     var selectedUrl = ""
     var selectedSummary = ""
+    var selectedTitle = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +77,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedUrl = baseUrl + (movies[indexPath.row]["poster_path"] as! String)
+        selectedTitle = movies[indexPath.row]["title"] as! String
         selectedSummary = movies[indexPath.row]["overview"] as! String
         
         performSegue(withIdentifier: "detailsSegue", sender: self)
@@ -84,6 +86,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextVC = segue.destination as! DetailsViewController
         nextVC.imgUrl = selectedUrl
+        nextVC.movieTitle = selectedTitle
         nextVC.summary = selectedSummary
     }
 

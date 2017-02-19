@@ -13,16 +13,24 @@ class DetailsViewController: UIViewController {
 
     @IBOutlet weak var posterImg: UIImageView!
     @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var infoView: UIView!
     
     var imgUrl = ""
     var summary = ""
+    var movieTitle = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
 
         // Do any additional setup after loading the view.
         posterImg.setImageWith(NSURL(string: imgUrl) as! URL)
         summaryLabel.text = summary
+        summaryLabel.sizeToFit()
+        titleLabel.text = movieTitle
     }
 
     override func didReceiveMemoryWarning() {
