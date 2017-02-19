@@ -19,6 +19,8 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var selectedSummary = ""
     var selectedTitle = ""
     
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,32 +29,11 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
 
-        // Do any additional setup after loading the view.
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = URL(string: "http://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
-        let request = URLRequest(
-            url: url!,
-            cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData,
-            timeoutInterval: 10)
-        let session = URLSession(
-            configuration: URLSessionConfiguration.default,
-            delegate: nil,
-            delegateQueue: OperationQueue.main
-        )
-        let task: URLSessionDataTask =
-            session.dataTask(with: request,
-                             completionHandler: { (dataOrNil, response, error) in
-                                if let data = dataOrNil {
-                                    if let responseDictionary = try! JSONSerialization.jsonObject(
-                                        with: data, options:[]) as? NSDictionary {
-                                        self.movies = responseDictionary["results"] as! [NSDictionary]
-                                        print("response: \(self.movies)")
-                                        self.moviesTableView.reloadData()
-                                        MBProgressHUD.hide(for: self.view, animated: true)
-                                    }
-                                }
-            })
-        task.resume()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction), for: UIControlEvents.valueChanged)
+        moviesTableView.addSubview(refreshControl)
+        
+        fetchData()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,6 +66,39 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         selectedSummary = movies[indexPath.row]["overview"] as! String
         
         performSegue(withIdentifier: "detailsSegue", sender: self)
+    }
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        fetchData()
+    }
+    
+    func fetchData(){
+        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+        let url = URL(string: "http://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let request = URLRequest(
+            url: url!,
+            cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData,
+            timeoutInterval: 10)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
+            delegate: nil,
+            delegateQueue: OperationQueue.main
+        )
+        let task: URLSessionDataTask =
+            session.dataTask(with: request,
+                             completionHandler: { (dataOrNil, response, error) in
+                                if let data = dataOrNil {
+                                    if let responseDictionary = try! JSONSerialization.jsonObject(
+                                        with: data, options:[]) as? NSDictionary {
+                                        self.movies = responseDictionary["results"] as! [NSDictionary]
+                                        print("response: \(self.movies)")
+                                        self.moviesTableView.reloadData()
+                                        MBProgressHUD.hide(for: self.view, animated: true)
+                                        self.refreshControl.endRefreshing()
+                                    }
+                                }
+            })
+        task.resume()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
