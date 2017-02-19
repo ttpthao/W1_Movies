@@ -24,12 +24,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "W1_Movies/MoviesViewController.swift"
-            timestampString = "509199734.944628"
+            timestampString = "509205147.049279"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "searchBar(_:textDidChange:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "W1_Movies/MoviesViewController.swift"
+            timestampString = "509205147.049279"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "fetchData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

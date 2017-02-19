@@ -23,9 +23,9 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var movies = [NSDictionary]()
     var filteredMovies = [NSDictionary]()
-    let baseUrl = "http://image.tmdb.org/t/p/w500"
     var endpoint: String!
     var prevSearch = ""
+    var imagePaths = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,10 +78,54 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.titleLabel.text = filteredMovies[indexPath.row]["title"] as? String
         cell.summaryLabel.text = filteredMovies[indexPath.row]["overview"] as? String
-        let imgUrl = baseUrl + (filteredMovies[indexPath.row]["poster_path"] as! String)
-        cell.posterImg.setImageWith(NSURL(string: imgUrl) as! URL)
+        
+        //highlight cell when selected
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.lightGray
+        cell.selectedBackgroundView = backgroundView
+        
+        // All images fade in
+        
+        if let imgUrl = filteredMovies[indexPath.row]["poster_path"] as? String {
+            self.loadImage(cell.imageView!, posterPath: imgUrl)
+        }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        moviesTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func loadImage(_ sender: UIImageView, posterPath: String) {
+        let baseLowImgUrl = "https://image.tmdb.org/t/p/w185" + posterPath
+        let baseHighImgUrl = "https://image.tmdb.org/t/p/w500" + posterPath
+        
+        let lowImgUrl = URL(string: baseLowImgUrl)!
+        let highImgUrl = URL(string: baseHighImgUrl)!
+        
+        let lowImageRequest = NSURLRequest(url: lowImgUrl)
+        let highImageRequest = NSURLRequest(url: highImgUrl)
+        
+        //All images fade in
+        if !imagePaths.contains(baseHighImgUrl) {
+            sender.setImageWith(lowImageRequest as URLRequest, placeholderImage: nil, success: { (lowImageRequest, response, image) in
+                sender.image = image
+                sender.alpha = 0
+                UIView.animate(withDuration: 0.3, animations: {
+                    sender.alpha = 1
+                }, completion: { (completed) in
+                    sender.setImageWith(highImageRequest as URLRequest, placeholderImage: nil, success: { (highImageRequest, response, image) in
+                        if response != nil {
+                            self.imagePaths.append(baseHighImgUrl)
+                            sender.image = image
+                        }
+                    }, failure: nil)
+                })
+            }, failure: nil)
+        } else {
+            sender.setImageWith(highImgUrl)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -91,8 +135,9 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "gridMoviesCell", for: indexPath) as? MoviesGridCell {
             
-            let imgUrl = baseUrl + (filteredMovies[indexPath.row]["poster_path"] as! String)
-            cell.posterImgView.setImageWith(NSURL(string: imgUrl) as! URL)
+            if let imgUrl = filteredMovies[indexPath.row]["poster_path"] as? String {
+                self.loadImage(cell.posterImgView, posterPath: imgUrl)
+            }
             
             return cell
         }
@@ -117,6 +162,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         )
         
         errorView.isHidden = true
+        self.searchBar.isHidden = false
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
@@ -140,6 +186,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 } else {
                                     self.refreshControl.endRefreshing()
                                     self.errorView.isHidden = false
+                                    self.searchBar.isHidden = true
                                 }
                 MBProgressHUD.hide(for: self.view, animated: true)
                                 
@@ -152,7 +199,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        prevSearch = searchText
+        self.prevSearch = searchText
         if (searchText == "") {
             filteredMovies = movies
             searchBar.resignFirstResponder()
@@ -179,6 +226,13 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        self.prevSearch = ""
+        
+        if (switchViewMode.selectedSegmentIndex == 0) {
+            moviesTableView.reloadData()
+        } else {
+            gridView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -2,7 +2,7 @@
 
 **W1_Movies** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **X** hours spent in total
+Time spent: **10** hours spent in total
 
 ## User Stories
 
@@ -19,14 +19,16 @@ The following **optional** features are implemented:
 - [X] Add a tab bar for **Now Playing** and **Top Rated** movies.
 - [X] Implement segmented control to switch between list view and grid view.
 - [X] Add a search bar.
-- [ ] All images fade in.
-- [ ] For the large poster, load the low-res image first, switch to high-res when complete.
-- [ ] Customize the highlight and selection effect of the cell.
-- [ ] Customize the navigation bar.
+- [X] All images fade in.
+- [X] For the large poster, load the low-res image first, switch to high-res when complete.
+- [X] Customize the highlight and selection effect of the cell.
+- [X] Customize the navigation bar.
 
 The following **additional** features are implemented:
 
 - [X] Add a tab bar for **Popular** and **Upcoming** movies.
+- [X] Add cancel button for search bar
+- [X] Remember search value when back to Movies List from Movie Details View 
 
 ## Video Walkthrough
 
