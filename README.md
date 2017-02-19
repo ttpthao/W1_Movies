@@ -34,13 +34,14 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/ttpthao/W1_Movies/blob/master/Movies.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+- I got an error message 'No such module AFNetworking' when import it to MoviesViewController although I already installed AFNetworking. I must retry 3 or 4 times then the problem have resolved.
+- When I start to implement the error message when there is a network error, I do not know how to do it. Based on discussion in #questions group on slack, I did it.
 
 ## License
 
