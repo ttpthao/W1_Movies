@@ -13,6 +13,10 @@ import MBProgressHUD
 class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var moviesTableView: UITableView!
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var errorImage: UIImageView!
+    
+    
     var movies = [NSDictionary]()
     let baseUrl = "http://image.tmdb.org/t/p/w500"
     var selectedUrl = ""
@@ -32,6 +36,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         refreshControl.addTarget(self, action: #selector(refreshControlAction), for: UIControlEvents.valueChanged)
         moviesTableView.addSubview(refreshControl)
         
+        self.errorImage.image = UIImage(named: "error")
         fetchData()
         
     }
@@ -84,6 +89,9 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             delegate: nil,
             delegateQueue: OperationQueue.main
         )
+        
+        errorView.isHidden = true
+        
         let task: URLSessionDataTask =
             session.dataTask(with: request,
                              completionHandler: { (dataOrNil, response, error) in
@@ -96,6 +104,9 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         MBProgressHUD.hide(for: self.view, animated: true)
                                         self.refreshControl.endRefreshing()
                                     }
+                                } else {
+                                    self.refreshControl.endRefreshing()
+                                    self.errorView.isHidden = false
                                 }
             })
         task.resume()
