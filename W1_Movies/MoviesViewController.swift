@@ -77,6 +77,8 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedUrl = baseUrl + (movies[indexPath.row]["poster_path"] as! String)
         selectedSummary = movies[indexPath.row]["overview"] as! String
+        
+        performSegue(withIdentifier: "detailsSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

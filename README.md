@@ -8,8 +8,8 @@ Time spent: **X** hours spent in total
 
 The following **required** functionality is completed:
 
-- [ ] User can view a list of movies currently playing in theaters. Poster images load asynchronously.
-- [ ] User can view movie details by tapping on a cell.
+- [X] User can view a list of movies currently playing in theaters. Poster images load asynchronously.
+- [X] User can view movie details by tapping on a cell.
 - [ ] User sees loading state while waiting for the API.
 - [ ] User sees an error message when there is a network error.
 - [ ] User can pull to refresh the movie list.
@@ -42,7 +42,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2017] [Thao Tran]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

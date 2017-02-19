@@ -53,7 +53,6 @@
                                             <outlet property="posterImg" destination="kny-52-M7U" id="2ED-nd-N1D"/>
                                             <outlet property="summaryLabel" destination="uLw-2U-ACY" id="yTb-pO-a6x"/>
                                             <outlet property="titleLabel" destination="bFg-mE-xZx" id="cRG-t6-PmN"/>
-                                            <segue destination="XD4-nB-lc6" kind="push" id="Egt-iL-Nb7"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -64,6 +63,7 @@
                     <navigationItem key="navigationItem" id="Lt9-H5-mQg"/>
                     <connections>
                         <outlet property="moviesTableView" destination="O23-eB-SwA" id="Puo-ld-fPX"/>
+                        <segue destination="XD4-nB-lc6" kind="push" identifier="detailsSegue" id="lCH-6U-yHY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
