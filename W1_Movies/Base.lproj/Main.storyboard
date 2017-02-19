@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies View Controller-->
+        <!--Movies-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesViewController" customModule="W1_Movies" customModuleProvider="target" sceneMemberID="viewController">
@@ -78,9 +78,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Lt9-H5-mQg">
-                        <nil key="title"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Movies" id="Lt9-H5-mQg"/>
                     <connections>
                         <outlet property="errorImage" destination="abw-xN-JIo" id="VzL-g0-XQS"/>
                         <outlet property="errorView" destination="iak-bg-g2a" id="QP2-By-Npl"/>
@@ -150,7 +148,7 @@
         <!--Navigation Controller-->
         <scene sceneID="W80-Nx-9Yu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bb9-xy-iyj" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MoviesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Bb9-xy-iyj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="och-CQ-Eie">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
